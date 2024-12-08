@@ -178,6 +178,7 @@
                 <tr><th>Country</th><td><c:out value="${donation.country}" /></td></tr>
                 <tr><th>Donation Type</th><td><c:out value="${donation.donationType}" /></td></tr>
                 <tr><th>Donation Amount</th><td>Rs.<c:out value="${donation.donationAmount}" /></td></tr>
+                <tr><th>Status</th><td><c:out value="${donation.status}"/></td></tr>
             </table>
         </div>
 

@@ -2,14 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%-- <%
+ <%
 Admin admin = (Admin) session.getAttribute("admin");
 if(admin==null)
 {
 	response.sendRedirect("adminsessionexpiry");
 	return;
 }
-%> --%>
+%> 
 
 
 <!DOCTYPE html>
@@ -156,7 +156,12 @@ if(admin==null)
                     <li><a href="deleterecipient"><i class="fas fa-user-times"></i> Delete Recipients</a></li>
                 </ul>
             </li>
-
+            
+            <li><a href="viewalldonationsbyadmin"><i class="fas fa-eye"></i>View Donations</a></li>
+            <!-- <li><a href="updatedonationtrackingDetails"><i class="fas fa-user-edit"></i>Update Tracking Deta</a></li> -->
+            
+            <li><a href="updatedonationstatus"><i class="fas fa-user-edit"></i>Update Status Of Donation</a></li>
+            
             <li><a href="adminlogout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
         </ul>
     </div>

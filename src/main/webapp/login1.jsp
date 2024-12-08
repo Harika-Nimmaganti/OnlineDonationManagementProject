@@ -9,11 +9,11 @@
         function redirectToRolePage() {
             const role = document.getElementById("roleSelect").value;
             if (role === "admin") {
-                window.location.href = "adminlogin.jsp"; // Redirect to Admin login page
+                window.location.href = "adminlogin"; // Redirect to Admin login page
             } else if (role === "Donor") {
-                window.location.href = "donorlogin.jsp"; // Redirect to Donor login page
+                window.location.href = "donorlogin"; // Redirect to Donor login page
             } else if (role === "Recipient") {
-                window.location.href = "recipientlogin.jsp"; // Redirect to Recipient login page
+                window.location.href = "recipientlogin"; // Redirect to Recipient login page
             }
         }
     </script>
@@ -25,11 +25,11 @@
         <div class="container">
             <a href="index.html" class="logo"><i class="fas fa-hands-helping"></i>ONECAUSE</a>
             <ul class="nav-links">
-                <li><a href="home.jsp">Home</a></li>
-                <li><a href="ongoing.jsp">Ongoing Drives</a></li>
-                <li><a href="impact.jsp">Impact</a></li>
-                <li><a href="about.jsp">About Us</a></li>
-                <li><a href="login1.html">Login</a></li>
+                <li><a href="home">Home</a></li>
+                <li><a href="ongoing">Ongoing Drives</a></li>
+                <li><a href="impact">Impact</a></li>
+                <li><a href="about">About Us</a></li>
+                <li><a href="login1">Login</a></li>
              
             </ul>
         </div>

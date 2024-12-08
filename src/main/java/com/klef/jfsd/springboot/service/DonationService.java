@@ -14,5 +14,13 @@ public interface DonationService
 	public long donationcount();
 	public String saveDonation(Request request);
 	public List<Request> ViewAllRequests();
+	
+	 public void approveDonation(int donationId) ;
+	public void dispatchDonation(int donationId);
+	public void deliverDonation(int donationId);
+	public List<Donation> getDonationsByDonor(int donorId);
+	
+	public String getDonationTrackingDetails(Donation donation);
+	
 
 }

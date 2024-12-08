@@ -173,19 +173,25 @@ if(d==null)
     </style>
 </head>
 <body>
-   <!-- Sidebar Navbar -->
+  <!-- Sidebar Navbar -->
     <div class="navbar">
-        <h1>ONECAUSE</h1>
-        <ul>
-            <li><a href="donorhome"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="donorprofile"><i class="fas fa-user"></i> Profile</a></li>
-            <li><a href="makedonation"><i class="fas fa-donate"></i> Make a Donation</a></li>
-            <li><a href="viewalldonations"><i class="fas fa-hand-holding-heart"></i> My Donations</a></li>
-            <li><a href="orders"><i class="fas fa-money-bill-alt"></i> Make a Payment</a></li>
-      
-            <li><a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
+    <h1>ONECAUSE</h1>
+    <ul>
+        <li><a href="donorhome"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="donorprofile"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li><a href="makedonation"><i class="fas fa-gift"></i> Make a Donation</a></li>
+        <li><a href="viewalldonations"><i class="fas fa-hand-holding-heart"></i> My Donations</a></li>
+        <li><a href="orders"><i class="fas fa-credit-card"></i> Make a Payment</a></li>
+        <li><a href="trackDonation"><i class="fas fa-search"></i> Track Donation</a></li>
+        <li><a href="trustedorg"><i class="fas fa-heart"></i> Trusted Organizations</a></li>
+        
+        <li><a href="logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
+
+
+</div>
+
 
     <!-- Main Content -->
     <div class="content-wrapper">

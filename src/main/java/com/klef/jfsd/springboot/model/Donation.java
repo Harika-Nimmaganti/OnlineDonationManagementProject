@@ -1,5 +1,6 @@
 package com.klef.jfsd.springboot.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,20 @@ public class Donation
 	    private Double donationAmount; 
 	    private String description; 
 	    private String queries; 
+	    
+	    @Column(length = 20, nullable = false)
+	    private String status = "PENDING"; // New field with default value
+	    
+	    private String trackingDetails;
+
+	    public String getStatus() {
+	        return status;
+	    }
+
+	    public void setStatus(String status) {
+	    	this.status = status;
+	    }
+	    
 	    public int getDonorId() {
 			return donorId;
 		}
@@ -176,4 +191,12 @@ public class Donation
 	                ", queries='" + queries + '\'' +
 	                '}';
 	    }
+
+		public String getTrackingDetails() {
+			return trackingDetails;
+		}
+
+		public void setTrackingDetails(String trackingDetails) {
+			this.trackingDetails = trackingDetails;
+		}
 	}

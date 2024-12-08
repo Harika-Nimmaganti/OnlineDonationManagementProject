@@ -1,17 +1,24 @@
 package com.klef.jfsd.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.mail.javamail.JavaMailSender;
 
+import com.klef.jfsd.springboot.model.Donation;
 import com.klef.jfsd.springboot.model.Donor;
+import com.klef.jfsd.springboot.model.Orders;
+import com.klef.jfsd.springboot.service.DonationService;
 import com.klef.jfsd.springboot.service.DonorService;
+import com.klef.jfsd.springboot.service.OrderService;
 import com.razorpay.Order;
 
 import jakarta.mail.internet.MimeMessage;
@@ -23,6 +30,13 @@ public class DonorController
 {
 	@Autowired
 	private DonorService donorService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+    public DonationService donationService;
+	
 	
 	
 	@GetMapping("regdonor")
@@ -79,7 +93,7 @@ public class DonorController
     		 HttpSession session = request.getSession();
     		 session.setAttribute("donor",d);
     		 
-    		 session.setMaxInactiveInterval(10);
+    		 session.setMaxInactiveInterval(50);
     		 
     		 mv.setViewName("donorhome");
     	 }
@@ -212,5 +226,34 @@ public class DonorController
 	      mv.addObject("message", "Email Sent Successfully");
 	      return mv;
 	      }
+	    
+	    
+	    
+	    
+	    
+	    @PostMapping("/trackDonation")
+	    public ModelAndView trackDonation(@RequestParam("donorId") int donorId) {
+	        ModelAndView mv = new ModelAndView("trackDonationResult");
+	        List<Donation> donations = donationService.getDonationsByDonor(donorId);
+	        mv.addObject("donations", donations);
+	        return mv;
+	    }
+	    
+	    @GetMapping("trackDonation")
+		public ModelAndView trackDonation()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("trackDonation");
+			return mv;
+		}
+	    
+	    @GetMapping("trustedorg")
+		public ModelAndView trustedorg()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("trustedorg");
+			return mv;
+		}
+	    
 	    
 }

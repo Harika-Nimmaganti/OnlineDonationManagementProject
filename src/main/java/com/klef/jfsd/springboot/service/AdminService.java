@@ -23,4 +23,9 @@ public interface AdminService
 	public long donorcount();
 
 	public long recipientcount();
+	
+	public String updatedonationstatus(String status, int did);
+	
+	public String updatetracktatus(String trackingDetails, int did);
+	
 }

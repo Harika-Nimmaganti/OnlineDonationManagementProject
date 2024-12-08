@@ -4,8 +4,12 @@ import java.sql.Blob;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.klef.jfsd.springboot.model.Donation;
 import com.klef.jfsd.springboot.model.Request;
+import com.klef.jfsd.springboot.repository.DonationRepository;
 import com.klef.jfsd.springboot.service.DonationService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +27,9 @@ public class DonationController
 {
     @Autowired
     public DonationService donationService;
+    
+    @Autowired
+    private DonationRepository donationRepository;
     
     @GetMapping("makedonation")
    	public ModelAndView makedonation()
@@ -160,6 +168,63 @@ public class DonationController
       ModelAndView mv=new ModelAndView("viewrequestsbyrecipient");
       mv.addObject("reqlist", reqlist);
       return mv;
+    }
+    
+    
+
+    @GetMapping("/viewDonations")
+    public String viewDonations(Model model) {
+        // Fetch all donations
+        model.addAttribute("donationlist", donationRepository.findAll());
+        model.addAttribute("count", donationRepository.count());
+        return "viewdonationsbyadmin"; // Return the JSP view name
+    }
+
+    
+    
+//    
+//    @PostMapping("/approveDonation")
+//    public String approveDonation(@RequestParam("donationId") int donationId) {
+//        Donation donation = donationRepository.findById(donationId).orElse(null);
+//        if (donation != null) {
+//            donation.setStatus("APPROVED");
+//            donationRepository.save(donation);
+//        }
+//        return "redirect:/viewDonations";
+//    }
+//
+//    @PostMapping("/dispatchDonation")
+//    public String dispatchDonation(@RequestParam("donationId") int donationId) {
+//        Donation donation = donationRepository.findById(donationId).orElse(null);
+//        if (donation != null) {
+//            donation.setStatus("DISPATCHED");
+//            donationRepository.save(donation);
+//        }
+//        return "redirect:/viewDonations";
+//    }
+//
+//    @PostMapping("/deliverDonation")
+//    public String deliverDonation(@RequestParam("donationId") int donationId) {
+//        Donation donation = donationRepository.findById(donationId).orElse(null);
+//        if (donation != null) {
+//            donation.setStatus("DELIVERED");
+//            donationRepository.save(donation);
+//        }
+//        return "redirect:/viewDonations";
+//    }
+//    
+    
+    
+    @GetMapping("/tracking/{donationId}")
+    public ResponseEntity<String> getDonationTracking(@PathVariable("donationId") Integer donationId) {
+        Donation donation = donationService.getDonationById(donationId);
+        if (donation == null) {
+            return new ResponseEntity<>("Donation not found.", HttpStatus.NOT_FOUND);
+        }
+
+        // Track donation status
+        String trackingDetails = donationService.getDonationTrackingDetails(donation);
+        return new ResponseEntity<>(trackingDetails, HttpStatus.OK);
     }
 
 }

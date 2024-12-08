@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.klef.jfsd.springboot.model.Admin;
+import com.klef.jfsd.springboot.model.Donation;
 import com.klef.jfsd.springboot.model.Donor;
 import com.klef.jfsd.springboot.model.Recipient;
 import com.klef.jfsd.springboot.service.AdminService;
+import com.klef.jfsd.springboot.service.DonationService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,14 +25,10 @@ public class AdminController
 	 @Autowired 
 	 private AdminService adminService; 
 	   
+	 @Autowired
+	 public DonationService donationService;
 	 
-	 @GetMapping("/")
-	  public ModelAndView home()
-	  {
-	    ModelAndView mv= new ModelAndView();
-	    mv.setViewName("home");
-	    return mv;
-	  }
+	 
 	 
 	 @GetMapping("adminhome")
      public ModelAndView adminhome()
@@ -67,7 +65,7 @@ public class AdminController
      	HttpSession session = request.getSession();
      	session.setAttribute("admin",admin);//employee is session variable
      	
-     	session.setMaxInactiveInterval(10);//removing session after 5 seconds
+     	session.setMaxInactiveInterval(50);//removing session after 5 seconds
       //return "Admin Login Success"; 
       mv.setViewName("adminhome"); 
       
@@ -151,6 +149,7 @@ public class AdminController
 	       mv.addObject("donorlist",donorlist);
        long count= adminService.donorcount();
        mv.addObject("count", count);
+       
 	       return mv;
 	     }
 	  
@@ -181,6 +180,8 @@ public class AdminController
 	       List<Donor> donorlist = adminService.ViewAllDonors();
 	       mv.setViewName("deletedonor");
 	       mv.addObject("donorlist",donorlist);
+	      
+
 	       return mv;
 	     }
 	     
@@ -287,6 +288,110 @@ public class AdminController
 	     }
 	     
 	  
-	  
-     
+	 	
+	 	@GetMapping("viewalldonationsbyadmin")
+	    public ModelAndView viewalldonationsbyadmin() {
+	        ModelAndView mv = new ModelAndView();
+	        List<Donation> donationlist = donationService.ViewAllDonations();
+	        mv.setViewName("viewalldonationsbyadmin");
+	        mv.addObject("donationlist", donationlist);
+	        long count= donationService.donationcount();
+	        mv.addObject("count", count);
+	        
+
+	        return mv;
+	    }
+	 	
+	 	
+	 	
+	 	
+	 	
+	 	@GetMapping("updatedonationstatus")
+	     public ModelAndView updatedonationstatus()
+	     {
+	       ModelAndView mv = new ModelAndView();
+	       List<Donation> donationlist = donationService.ViewAllDonations();
+	       mv.setViewName("updatedonationstatus");
+	       mv.addObject("donationlist",donationlist);
+	       return mv;
+	     }
+	     
+	 	@GetMapping("processdonationstatus")
+	 	public String processDonationStatusUpdate(@RequestParam("id") int did, @RequestParam("status") String status) {
+	 	    adminService.updatedonationstatus(status, did);
+	 	    return "redirect:/updatedonationstatus";
+	 	}
+	     
+	 	
+	 	@GetMapping("updatedonationtrackingDetails")
+	     public ModelAndView updatedonationtrackingDetails()
+	     {
+	       ModelAndView mv = new ModelAndView();
+	       List<Donation> donationlist = donationService.ViewAllDonations();
+	       mv.setViewName("updatedonationtrackingDetails");
+	       mv.addObject("donationlist",donationlist);
+	       return mv;
+	     }
+	     
+	 	@GetMapping("processdonationtrackingDetails")
+	 	public String processdonationtrackingDetails(@RequestParam("id") int did, @RequestParam("trackingDetails") String trackingDetails) {
+	 	    adminService.updatetracktatus(trackingDetails, did);
+	 	    return "redirect:/updatedonationstatus";
+	 	}
+	     
+	 	
+	 	
+	 	@GetMapping("/")
+		  public ModelAndView home()
+		  {
+		    ModelAndView mv= new ModelAndView();
+		    mv.setViewName("home");
+		    return mv;
+		  }
+	 	
+	 	 @GetMapping("home")
+			public ModelAndView home1()
+			{
+				ModelAndView mv=new ModelAndView();
+				mv.setViewName("home");
+				return mv;
+			}
+	 
+	 	@GetMapping("ongoing")
+		public ModelAndView ongoing()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("ongoing");
+			return mv;
+		}
+ 
+	 	
+	 	@GetMapping("impact")
+		public ModelAndView impact()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("impact");
+			return mv;
+		}
+ 
+	 	
+	 	@GetMapping("about")
+		public ModelAndView about()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("about");
+			return mv;
+		}
+	 	
+	 	@GetMapping("login1")
+		public ModelAndView login1()
+		{
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("login1");
+			return mv;
+		}
+	 	
+	
+		
+		
 }

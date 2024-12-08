@@ -54,5 +54,56 @@ public class DonationServiceImpl implements DonationService
 		return (List<Request>) requestRepository.findAll();
 		
 	}
+	
+	
+
+    // Update Donation Status to APPROVED
+    public void approveDonation(int donationId) {
+        Donation donation = getDonationById(donationId);
+        donation.setStatus("APPROVED");
+        donationRepository.save(donation);
+    }
+
+    // Update Donation Status to DISPATCHED
+    public void dispatchDonation(int donationId) {
+        Donation donation = getDonationById(donationId);
+        donation.setStatus("DISPATCHED");
+        donationRepository.save(donation);
+    }
+
+    // Update Donation Status to DELIVERED
+    public void deliverDonation(int donationId) {
+        Donation donation = getDonationById(donationId);
+        donation.setStatus("DELIVERED");
+        donationRepository.save(donation);
+    }
+
+    // Get Donations by Donor ID for Tracking
+    public List<Donation> getDonationsByDonor(int donorId) {
+        return donationRepository.findByDonorId(donorId);
+    }
+    
+
+    public String getDonationTrackingDetails(Donation donation) {
+        String status = donation.getStatus();
+        String trackingDetails = "Donation Status: " + status;
+
+        if ("Started".equalsIgnoreCase(status)) {
+            trackingDetails += " - Donation has been initiated.";
+        } else if ("Dispatched".equalsIgnoreCase(status)) {
+            trackingDetails += " - Donation has been dispatched and is on the way.";
+        } else if ("Arrived".equalsIgnoreCase(status)) {
+            trackingDetails += " - Donation has arrived at the destination.";
+        } else {
+            trackingDetails += " - Status not available.";
+        }
+
+        // Optionally, include the tracking details like timestamp or other info
+        if (donation.getTrackingDetails() != null) {
+            trackingDetails += " - Additional Details: " + donation.getTrackingDetails();
+        }
+
+        return trackingDetails;
+    }
 
 }

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.klef.jfsd.springboot.model.Admin;
 import com.klef.jfsd.springboot.model.Donor;
 import com.klef.jfsd.springboot.model.Recipient;
+
 import com.klef.jfsd.springboot.repository.AdminRepository;
+import com.klef.jfsd.springboot.repository.DonationRepository;
 import com.klef.jfsd.springboot.repository.DonorRepository;
 import com.klef.jfsd.springboot.repository.RecipientRepository;
  
@@ -27,6 +29,9 @@ private DonorRepository donorRepository;
  @Autowired
  private RecipientRepository recipientRepository;
 
+
+ @Autowired
+ private DonationRepository donationRepository;
 
  
  @Override 
@@ -65,12 +70,6 @@ public String deletedonor(int did)
 }
  
 
-
-
-
-
-
-
 @Override
 public String RecipientRegistration(Recipient r)
 {
@@ -107,6 +106,21 @@ public long donorcount() {
 @Override
 public long recipientcount() {
 	return recipientRepository.count();
+}
+
+
+@Override
+public String updatedonationstatus(String status, int did)
+{
+	donationRepository.updatedonationstatus(status, did);
+	return "Donnation Status Updated Successfully";
+}
+
+@Override
+public String updatetracktatus(String trackingDetails, int did)
+{
+	donationRepository.updatedonationstatus(trackingDetails, did);
+	return "Donnation trackingDetails Updated Successfully";
 }
 
 }

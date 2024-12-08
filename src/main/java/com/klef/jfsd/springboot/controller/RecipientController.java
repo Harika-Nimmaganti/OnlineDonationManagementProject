@@ -88,7 +88,7 @@ public class RecipientController
 	    	 HttpSession  session = request.getSession();
 	    	 session.setAttribute("recipient",recipient); 
 	    	 
-	    	 session.setMaxInactiveInterval(10);
+	    	 session.setMaxInactiveInterval(50);
 	    	 
 	    	 
 	      mv.setViewName("recipienthome");

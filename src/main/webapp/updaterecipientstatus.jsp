@@ -1,16 +1,8 @@
 
-<%@page import="com.klef.jfsd.springboot.model.Admin"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%
-Admin admin = (Admin) session.getAttribute("admin");
-if(admin==null)
-{
-	response.sendRedirect("adminsessionexpiry");
-	return;
-}
-%>
+
+
 <!DOCTYPE html>
 <html>
 <head>

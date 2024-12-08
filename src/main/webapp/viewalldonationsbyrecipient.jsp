@@ -197,7 +197,9 @@ if(recipient==null)
             <th>State</th>
             <th>Country</th> -->
             <th>Type</th>
+            
             <th>Details</th>
+            
             <th>Actions</th>
         </tr>
         <c:forEach items="${donationlist}" var="donation">
@@ -212,6 +214,7 @@ if(recipient==null)
                 <td><c:out value="${donation.state}" /></td>
                 <td><c:out value="${donation.country}" /></td> --%>
                 <td><c:out value="${donation.donationType}" /></td>
+                
                 <td>
                     <c:choose>
                         <c:when test="${donation.donationType == 'Money'}">
